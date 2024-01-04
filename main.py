@@ -38,8 +38,27 @@ with header.expander("About this app🔽", expanded=True):
 # Collecting Inputs
 with input:
     st.subheader("Inputs")
-
-    #-------
     #Columns for inputs
     serverCol, tokenCol = st.columns([1,3])
-#--------------------------
+	#User Input boxes
+    speckleServer = serverCol.text_input("Server URL", "speckle.xyz", help="Speckle server to connect.")
+    speckleToken = tokenCol.text_input("Speckle token", "087fea753d12f91a6f692c8ea087c1bf4112e93ed7", help="If you don't know how to get your token, take a look at this [link](<https://speckle.guide/dev/tokens.html>)👈")
+    #CLIENT
+    client = SpeckleClient(host=speckleServer)
+    #Get account from Token
+    account = get_account_from_token(speckleToken, speckleServer)
+    #Authenticate
+    client.authenticate_with_account(account)
+    #Streams List👇
+    streams = client.stream.list()
+    #Get Stream Names
+    streamNames = [s.name for s in streams]
+    #Dropdown for stream selection
+    sName = st.selectbox(label="Select your stream", options=streamNames, help="Select your stream from the dropdown")
+    #SELECTED STREAM ✅
+    stream = client.stream.search(sName)[0]
+    #Stream Branches 🌴
+    branches = client.branch.list(stream.id)
+    #Stream Commits 🏹
+    commits = client.commit.list(stream.id, limit=100)
+    #-------

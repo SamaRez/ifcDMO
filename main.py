@@ -55,10 +55,5 @@ with input:
     streamNames = [s.name for s in streams]
     #Dropdown for stream selection
     sName = st.selectbox(label="Select your stream", options=streamNames, help="Select your stream from the dropdown")
-    #SELECTED STREAM ✅
-    stream = client.stream.search(sName)[0]
-    #Stream Branches 🌴
-    branches = client.branch.list(stream.id)
-    #Stream Commits 🏹
-    commits = client.commit.list(stream.id, limit=100)
+
     #-------

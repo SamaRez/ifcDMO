@@ -35,3 +35,11 @@ with header.expander("About this app🔽", expanded=True):
         """
     )
 #--------------------------
+# Collecting Inputs
+with input:
+    st.subheader("Inputs")
+
+    #-------
+    #Columns for inputs
+    serverCol, tokenCol = st.columns([1,3])
+#--------------------------

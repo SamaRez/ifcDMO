@@ -16,3 +16,10 @@ st.set_page_config(
     page_icon="📊"
 )
 #--------------------------
+#CONTAINERS
+header = st.container()
+input = st.container()
+viewer = st.container()
+report = st.container()
+graphs = st.container()
+#--------------------------
